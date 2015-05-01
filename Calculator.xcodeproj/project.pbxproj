@@ -81,8 +81,6 @@
 		15962B031AECE982001183AD /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				15962B081AECE982001183AD /* AppDelegate.h */,
-				15962B091AECE982001183AD /* AppDelegate.m */,
 				15962B0B1AECE982001183AD /* ViewController.h */,
 				15962B0C1AECE982001183AD /* ViewController.m */,
 				15962B0E1AECE982001183AD /* Main.storyboard */,
@@ -96,6 +94,8 @@
 		15962B041AECE982001183AD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				15962B081AECE982001183AD /* AppDelegate.h */,
+				15962B091AECE982001183AD /* AppDelegate.m */,
 				15962B051AECE982001183AD /* Info.plist */,
 				15962B061AECE982001183AD /* main.m */,
 			);
