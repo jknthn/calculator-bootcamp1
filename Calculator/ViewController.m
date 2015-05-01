@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *displayLabel;
 @property (strong, nonatomic) NSMutableString *digitString;
 @property (strong, nonatomic) NSString *functionCall;
+@property (strong, nonatomic) UIButton *functionButton;
 @property (nonatomic) int index;
 @property (nonatomic) int digit;
 
@@ -36,15 +37,25 @@
     if ((self.index) || ([currentValue intValue])) {
     [self.digitString insertString:currentValue atIndex:self.index];
     [self.displayLabel setText:self.digitString];
-    self.index+=1;
+    self.index++;
     }
 }
 
 - (IBAction)touchFunction:(id)sender {
+    
     self.functionCall = [sender currentTitle];
+    
+    if (!self.digit){
     self.digit = [self.digitString intValue];
+    }
+    
     self.index=0;
     self.digitString = [NSMutableString new];
+    self.functionButton = [sender self];
+
+    [UIView animateWithDuration:0.1 animations:^{
+        [self.functionButton setBackgroundColor:[UIColor orangeColor]];
+    }];
 }
 
 - (IBAction)touchEnter:(id)sender {
@@ -56,18 +67,29 @@
     } else if ([self.functionCall  isEqual: @"*"]) {
         result = self.digit * [self.digitString intValue];
     }
+    
+    self.digit = result;
+    
     NSString *resultText = [NSString stringWithFormat:@"%d",result];
     [self.displayLabel setText:resultText];
     self.digitString = [NSMutableString new];
     self.index = 0;
+    
+    [UIView animateWithDuration:0.1 animations:^{
+        [self.functionButton setBackgroundColor:[UIColor lightGrayColor]];
+    }];
 }
 
 - (IBAction)touchClear:(id)sender {
     self.index=0;
+    self.digit=0;
     self.digitString = [NSMutableString new];
     [self.displayLabel setText:@"_"];
+    
+    [UIView animateWithDuration:0.1 animations:^{
+        [self.functionButton setBackgroundColor:[UIColor lightGrayColor]];
+    }];
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -79,6 +101,7 @@
     [self digitButtonsSetUp];
     self.digitString = [NSMutableString new];
     self.index = 0;
+    self.digit = 0;
 }
 
 - (void)digitButtonsSetUp {
